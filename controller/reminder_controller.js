@@ -41,15 +41,17 @@ let remindersController = {
   },
 
   update: (req, res) => {
-    console.log(req.body)
     let reminder = {
       id: req.params.id,
       title: req.body.title,
-      description: req.body.description,
-      completed: req.body.completed
+      description: req.body.description
     };
-    database.cindy.reminders.map( (rem, i) => { 
-      console.log(req.params.id, rem.id)
+    if (req.body.completed == 'true') {
+      reminder['completed'] = true
+    } else {
+      reminder['completed'] = false
+    }
+    database.cindy.reminders.map( (rem, i) => {
       if (reminder.id == rem.id) {
          database.cindy.reminders.splice(i, 1) 
         } 
