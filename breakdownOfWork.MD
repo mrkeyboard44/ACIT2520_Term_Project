@@ -4,6 +4,8 @@ Matthew Dandar:
 -created update function
 
 Alyssa Champion:
+- Created Trello Board 
+- Created Delete function
 
 
 Richard Wang:
