@@ -53,10 +53,9 @@ let remindersController = {
     }
     database.cindy.reminders.map( (rem, i) => {
       if (reminder.id == rem.id) {
-         database.cindy.reminders.splice(i, 1) 
+         database.cindy.reminders.splice(i, 1, reminder)
         } 
       });
-    database.cindy.reminders.push(reminder);
     console.log(reminder)
     res.redirect("/reminders");
 
