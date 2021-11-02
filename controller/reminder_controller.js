@@ -41,13 +41,22 @@ let remindersController = {
   },
 
   update: (req, res) => {
-    let formData = req.body;
-    console.log(formData);
-    let title = formData.title
-    let description = formData.description
-    let completed = formData.completed
-    let id = formData.id
-    res.render("reminder/index", { reminders: [{title, description, completed, id}] });
+    console.log(req.body)
+    let reminder = {
+      id: req.params.id,
+      title: req.body.title,
+      description: req.body.description,
+      completed: req.body.completed
+    };
+    database.cindy.reminders.map( (rem, i) => { 
+      console.log(req.params.id, rem.id)
+      if (reminder.id == rem.id) {
+         database.cindy.reminders.splice(i, 1) 
+        } 
+      });
+    database.cindy.reminders.push(reminder);
+    console.log(reminder)
+    res.redirect("/reminders");
 
   },
 
