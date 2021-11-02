@@ -41,7 +41,14 @@ let remindersController = {
   },
 
   update: (req, res) => {
-    // implement this code
+    let formData = req.body;
+    console.log(formData);
+    let title = formData.title
+    let description = formData.description
+    let completed = formData.completed
+    let id = formData.id
+    res.render("reminder/index", { reminders: [{title, description, completed, id}] });
+
   },
 
   delete: (req, res) => {
