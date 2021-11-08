@@ -1,4 +1,8 @@
 let database = require("../database");
+const express = require("express");
+const passport = require("../middleware/passport");
+const { forwardAuthenticated } = require("../middleware/checkAuth");
+
 
 let authController = {
   login: (req, res) => {
@@ -10,7 +14,12 @@ let authController = {
   },
 
   loginSubmit: (req, res) => {
-    // implement
+    console.log("Request sent")
+    console.log("")
+    passport.authenticate("local", {
+      successRedirect: "/dashboard",
+      failureRedirect: "/auth/login",
+    })
   },
 
   registerSubmit: (req, res) => {

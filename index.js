@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
@@ -12,6 +13,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(ejsLayouts);
 
 app.set("view engine", "ejs");
+
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
 
 // Routes start here
 
