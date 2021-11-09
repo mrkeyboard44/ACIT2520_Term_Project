@@ -18,7 +18,7 @@ router.post(
 router.get("/register", (req, res) => res.render("auth/register"))
 
 router.post(
-  "/auth/register",
+  "/register",
   (req, res) => console.log(database)
 )
 
