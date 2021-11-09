@@ -8,6 +8,7 @@ const localLogin = new LocalStrategy(
   },
   (email, password, done) => {
     const user = userController.getUserByEmailIdAndPassword(email, password);
+    console.log("email and password", email, password)
     return user
       ? done(null, user)
       : done(null, false, {
@@ -28,5 +29,7 @@ passport.deserializeUser(function (id, done) {
     done({ message: "User not found" }, null);
   }
 });
+
+console.log("passport.js has been called!!!")
 
 module.exports = passport.use(localLogin);
