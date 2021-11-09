@@ -15,7 +15,7 @@ let authController = {
 
   loginSubmit: (req, res) => {
     console.log("Request sent")
-    console.log("")
+    console.log (passport.authenticate) //Get this line of code to work somehow
     passport.authenticate("local", {
       successRedirect: "/dashboard",
       failureRedirect: "/auth/login",
