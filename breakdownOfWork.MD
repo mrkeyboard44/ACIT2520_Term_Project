@@ -1,11 +1,3 @@
-Nov 09 / 2021 (Third Sprint - ADMIN controls, Status: Incomplete)
-Matthew Dandar:
-
-Alyssa Champion:
-
-Richard Wang:
-
-
 Nov 2 / 2021 (Second sprint complete)
 Matthew Dandar:
 -implemented the authentication portion of login feature

@@ -2,7 +2,6 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { database } = require("../models/userModel");
-const { authController } = require("../controller/auth_controller")
 
 const router = express.Router();
 
@@ -20,8 +19,7 @@ router.get("/register", (req, res) => res.render("auth/register"))
 
 router.post(
   "/register",
-  
-  (req, res) => database.push(authController.register(req, res))
+  (req, res) => console.log(database)
 )
 
 router.get("/logout", (req, res) => {

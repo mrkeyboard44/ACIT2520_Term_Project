@@ -1,5 +1,4 @@
 let database = require("../database");
-let userDatabase = require("../models/userModel")
 const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
@@ -11,17 +10,8 @@ let authController = {
   },
 
   register: (req, res) => {
-    let newID = userDatabase.database.length + 1
-    const newUser = {
-        id: newID,
-        email: req.body.email,
-        password: req.body.password
-        }
-    database[newID] = { reminders: [] }
-    console.log("authcontroller", newUser)
-    res.render("auth/login")
-    return newUser
-    },
+    res.render("auth/register");
+  },
 
   loginSubmit: (req, res) => {
     console.log("Request sent")
@@ -37,4 +27,4 @@ let authController = {
   },
 };
 
-module.exports = { authController };
+module.exports = authController;
