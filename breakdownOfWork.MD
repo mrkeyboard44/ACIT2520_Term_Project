@@ -1,12 +1,13 @@
 Nov 2 / 2021 (Second sprint complete)
 Matthew Dandar:
-
+-implemented the authentication portion of login feature
 
 Alyssa Champion:
-
+-implementing register user feature
 
 Richard Wang:
-
+-imported required passport files into repository
+-
 
 
 
