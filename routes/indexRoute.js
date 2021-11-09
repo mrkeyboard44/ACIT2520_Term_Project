@@ -24,6 +24,12 @@ router.get("/reminder/:id/edit", ensureAuthenticated, remindersController.edit);
 
 router.get("/reminder/", ensureAuthenticated, remindersController.create);
 
+router.post("/reminder/update/:id", ensureAuthenticated, remindersController.update);
+
+router.post("/reminder/delete/:id", ensureAuthenticated, remindersController.delete);
+
+router.post("/reminder/", ensureAuthenticated, remindersController.create);
+
 module.exports = router;
 
 
