@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
-const { database } = require("../models/userModel");
+const { database } = require("../models/userDatabase");
 const { authController } = require("../controller/auth_controller")
 
 const router = express.Router();

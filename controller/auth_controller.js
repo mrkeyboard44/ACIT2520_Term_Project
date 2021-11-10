@@ -1,5 +1,5 @@
 let database = require("../database");
-let userDatabase = require("../models/userModel")
+let userDatabase = require("../models/userDatabase")
 const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
