@@ -1,4 +1,3 @@
-let database = require("../database");
 let userDatabase = require("../models/userDatabase")
 const express = require("express");
 const passport = require("../middleware/passport");
@@ -15,9 +14,10 @@ let authController = {
     const newUser = {
         id: newID,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        reminders: []
         }
-    database[newID] = { reminders: [] }
+    userDatabase.database.push(newUser)
     console.log("authcontroller", newUser)
     res.render("auth/login")
     return newUser

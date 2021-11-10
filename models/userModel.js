@@ -1,3 +1,7 @@
+const { database } = require("./userDatabase");
+
+
+
 const userModel = {
   findOne: (email) => {
     const user = database.find((user) => user.email === email);
