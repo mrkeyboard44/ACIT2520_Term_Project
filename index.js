@@ -3,14 +3,7 @@ const app = express();
 const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
-const reminderController = require("./controller/reminder_controller");
-const authController = require("./controller/auth_controller");
 
-
-
-// app.use(express.urlencoded({ extended: false }));
-
-// app.use(ejsLayouts);
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -49,25 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes start here
 
-// app.get("/reminders", reminderController.list);
-
-// app.get("/reminder/new", reminderController.new);
-
-// app.get("/reminder/:id", reminderController.listOne);
-
-// app.get("/reminder/:id/edit", reminderController.edit);
-
-// app.post("/reminder/", reminderController.create);
-
-// // Implement this yourself
-// app.post("/reminder/update/:id", reminderController.update);
-
-// // Implement this yourself
-// app.post("/reminder/delete/:id", reminderController.delete);
-
-// Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
 

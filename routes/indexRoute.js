@@ -2,7 +2,6 @@ const express = require("express");
 const remindersController = require("../controller/reminder_controller");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
-let database = require("../database");
 
 router.get("/", (req, res) => {
   res.send("welcome");
