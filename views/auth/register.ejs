@@ -18,6 +18,16 @@
       placeholder="Password"
       name="password">
     </div>
+    <div>
+      <div class="image-uploader">
+        <h4>Upload your own profile image</h4>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" accept="image/*" name="photo">
+
+            <input type="button" value="upload">
+        </form>
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
