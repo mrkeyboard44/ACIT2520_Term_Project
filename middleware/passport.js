@@ -33,10 +33,11 @@ passport.deserializeUser(function (id, done) {
 
 console.log("passport.js has been called!!!")
 
+console.log(process.env.GITHUB_CLIENT_ID)
 
 const githubLogin = (new GithubStrategy({
-  clientID: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: "https//localhost:3001/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {

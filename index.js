@@ -4,6 +4,23 @@ const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
 
+// const multer = require("multer")
+// const imgur = require("imgur")
+require("dotenv").config()
+
+// const storage = multer.diskStorage({
+//   destination: "./uploads",
+//   filename: (req, file, callback) => {
+//     callback(
+//       null,
+//       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+//     )
+//   }
+// })
+
+// const upload = multer({
+//   storage: storage,
+// })
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
