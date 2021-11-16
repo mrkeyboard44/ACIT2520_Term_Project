@@ -28,5 +28,8 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");
 });
+router.get("/github", authController.githubLogin)
+
+router.get("/github/callback", authController.gitback)
 
 module.exports = router;

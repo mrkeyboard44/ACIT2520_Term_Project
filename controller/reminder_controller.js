@@ -74,4 +74,11 @@ let remindersController = {
   },
 };
 
+//Using Unsplash API to get images for user profile
+//const user_id = process.env.Unsplash_USER_ID;
+//const images = await fetch(`https://api.unsplash.com/user/${user_id}/1600x900`);
+//const fetchedPhotos = await photos.json();
+
+
+
 module.exports = remindersController;

@@ -35,6 +35,12 @@ let authController = {
   registerSubmit: (req, res) => {
     // implement
   },
+  githubLogin: (req, res, next) => {
+    passport.authenticate('github', {scope: ['user:email']})(req,res,next)
+  },
+  gitback: (req, res, next) => {
+    passport.authenticate('github', {failureRedirect: '/auth/login', successRedirect: "reminder/dashboard"})(req,res,next)
+  },
 };
 
 module.exports = { authController };
