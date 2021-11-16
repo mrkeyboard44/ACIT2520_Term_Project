@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { database } = require("../models/userDatabase");
+const authController = require("../controller/auth_controller");
 
 const router = express.Router();
 
@@ -39,5 +40,8 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");
 });
+
+router.get("/github", authController.githubLogin)
+router.get("/github/callback", authController.gitback)
 
 module.exports = router;
