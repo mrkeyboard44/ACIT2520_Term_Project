@@ -11,6 +11,10 @@ const getUserByEmailIdAndPassword = (email, password) => {
   }
   return null;
 };
+
+const getUserByGithubIdOrCreate = (email, password) => {
+  
+}
 const getUserById = (id) => {
   let user = userModel.findById(id);
   if (user) {

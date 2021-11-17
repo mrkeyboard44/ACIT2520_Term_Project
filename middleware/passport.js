@@ -35,17 +35,22 @@ console.log("passport.js has been called!!!")
 
 console.log(process.env.GITHUB_CLIENT_ID)
 
-const githubLogin = (new GithubStrategy({
+let githubLogin = new GithubStrategy(
+  {
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "https//localhost:3001/auth/github/callback"
+  callbackURL: "http://localhost:3001/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
   console.log(profile)
-  let user = userController.getUserByGithubIdOrCreate(profile)
-  return done(null, user);
+  // let user = userController.getUserByGithubIdOrCreate(profile)
+  // return done(null, user);
+  
+  User.findOrCreate({ githubId: profile.id }, function (err, user) {
+    return done(err, user);
+  });
   }
-));
+);
 
 
 
