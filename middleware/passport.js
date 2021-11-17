@@ -10,6 +10,7 @@ const localLogin = new LocalStrategy(
   (email, password, done) => {
     const user = userController.getUserByEmailIdAndPassword(email, password);
     console.log("email and password", email, password)
+    console.log("user:", user)
     return user
       ? done(null, user)
       : done(null, false, {
@@ -42,13 +43,13 @@ let githubLogin = new GithubStrategy(
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
 (accessToken, refreshToken, profile, done) => {
-  console.log(profile)
-  // let user = userController.getUserByGithubIdOrCreate(profile)
-  // return done(null, user);
+  console.log("profile", profile)
+  let user = userController.getUserByGithubIdOrCreate(profile)
+  return done(null, user);
   
-  User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    return done(err, user);
-  });
+  // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+  //   return done(err, user);
+  // });
   }
 );
 
