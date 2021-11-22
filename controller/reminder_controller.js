@@ -62,7 +62,6 @@ let remindersController = {
   },
 
   delete: (req, res) => {
-    // Implement this code
     let index = -1;
     if (index <= 0) {
       userModel.findById(req.user.id).reminders.splice(index, 1);

@@ -44,9 +44,6 @@ let githubLogin = new GithubStrategy(
   let user = userController.getUserByGithubIdOrCreate(profile)
   return done(null, user);
   
-  // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-  //   return done(err, user);
-  // });
   }
 );
 
