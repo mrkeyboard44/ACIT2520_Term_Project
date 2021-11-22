@@ -28,6 +28,7 @@ router.post(
       email: req.body.email,
       password: req.body.password,
       reminders: [],
+      role: 'user'
     }
     database.push(newUser)
     console.log(database)

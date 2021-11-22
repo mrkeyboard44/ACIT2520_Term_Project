@@ -2,8 +2,6 @@ const { userModel } = require("../models/userModel");
 
 let remindersController = {
   list: (req, res) => {
-    console.log("req id", req.user.id)
-    console.log("usermodel findbyid", userModel.findById(req.user.id))
     res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders });
   },
 
@@ -71,6 +69,11 @@ let remindersController = {
     }
     res.redirect("/reminders");
   },
+
+  
+
+
+
 };
 
 module.exports = remindersController;

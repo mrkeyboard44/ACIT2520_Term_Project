@@ -1,7 +1,9 @@
 const express = require("express");
+const adminController = require("../controller/adminController");
 const remindersController = require("../controller/reminder_controller");
 const router = express.Router();
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
+const { route } = require("./authRoute");
 
 router.get("/", (req, res) => {
   res.send("welcome");
@@ -28,6 +30,12 @@ router.post("/reminder/update/:id", ensureAuthenticated, remindersController.upd
 router.post("/reminder/delete/:id", ensureAuthenticated, remindersController.delete);
 
 router.post("/reminder/", ensureAuthenticated, remindersController.create);
+
+
+
+router.get("/admin", ensureAuthenticated, adminController.dashboard);
+
+router.get("/admin/:id", ensureAuthenticated, adminController.revoke_session)
 
 module.exports = router;
 

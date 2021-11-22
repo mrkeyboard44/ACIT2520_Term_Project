@@ -5,6 +5,7 @@ const database = [
       email: "jimmy123@gmail.com",
       password: "jimmy123!",
       reminders: [],
+      role: 'user'
     },
     {
       id: 2,
@@ -12,6 +13,7 @@ const database = [
       email: "johnny123@gmail.com",
       password: "johnny123!",
       reminders: [],
+      role: 'user'
     },
     {
       id: 3,
@@ -19,6 +21,7 @@ const database = [
       email: "jonathan123@gmail.com",
       password: "jonathan123!",
       reminders: [{id: 1, title: "abc", description: "abcabc", completed: false}],
+      role: 'admin'
     },
   ];
 

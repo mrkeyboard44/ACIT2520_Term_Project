@@ -9,8 +9,6 @@ const localLogin = new LocalStrategy(
   },
   (email, password, done) => {
     const user = userController.getUserByEmailIdAndPassword(email, password);
-    console.log("email and password", email, password)
-    console.log("user:", user)
     return user
       ? done(null, user)
       : done(null, false, {
@@ -34,7 +32,6 @@ passport.deserializeUser(function (id, done) {
 
 console.log("passport.js has been called!!!")
 
-console.log(process.env.GITHUB_CLIENT_ID)
 
 let githubLogin = new GithubStrategy(
   {

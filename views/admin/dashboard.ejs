@@ -1,0 +1,16 @@
+<div class="container">
+    <title>Dashboard</title>
+    <h1>Dashboard</h1>
+    <h4>Welcome <%= name%></h4>
+    <h5>Current Active Sessions</h5>
+    <ul class="list-group">
+        <% sessions.forEach(function (sessionItem) { %>
+          <li class="list-group-item">
+            SessionID: <%= sessionItem.id %> ||
+            UserID: <%= sessionItem.userId %> 
+            <a href=<%= "/admin/" + sessionItem.id%>>revoke session</a>
+          </li>
+        <% }) %>
+      </ul>
+  </div>
+  
