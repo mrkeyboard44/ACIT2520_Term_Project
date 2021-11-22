@@ -6,7 +6,6 @@ const { passport } = require("../middleware/passport")
 let adminController = {
     dashboard: (req, res, store) => {
         (req.sessionStore.all((err, sessions) => { 
-            console.log(req)
             const finalSessionList = []
             for (let [sessionId, value] of Object.entries(sessions)) {
                 finalSessionList.push({id: sessionId, userId: value.passport.user})
@@ -22,11 +21,9 @@ let adminController = {
     },
 
     revoke_session: (req, res) => {
-        (req.sessionStore.all((err, sessions) => {
-            let session1 = req.params.id;
-            console.log("session info-----", req.session)
-            console.log("found session", sessions.session)
-            res.redirect("/admin")
+        // console.log(sessionId)
+        (req.sessionStore.destroy(req.params.id, () => {
+            res.redirect('/admin')
         }))
     },
 
