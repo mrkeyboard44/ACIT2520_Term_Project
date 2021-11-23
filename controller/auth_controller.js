@@ -31,6 +31,9 @@ let authController = {
   gitback: (req, res, next) => {
     passport.authenticate('github', {failureRedirect: '/auth/login', successRedirect: "/reminders"})(req, res, next)
   },
+  unsplashImage: (req,res,next) => {
+    const randomPicture = require()
+  }
 };
 
 module.exports = authController;

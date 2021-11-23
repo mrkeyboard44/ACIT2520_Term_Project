@@ -4,7 +4,7 @@ let remindersController = {
   list: (req, res) => {
     console.log("req id", req.user.id)
     console.log("usermodel findbyid", userModel.findById(req.user.id))
-    res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders });
+    res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders, user: req.user });
   },
 
   new: (req, res) => {
