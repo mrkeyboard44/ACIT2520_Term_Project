@@ -1,4 +1,8 @@
-const express = require("express");
+// import express, { Request, Response } from "express";
+// import { PrismaClient } from "@prisma/client";
+// const prisma = new PrismaClient();
+
+const express = require('express')
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { database } = require("../models/userDatabase");
@@ -17,6 +21,8 @@ router.post(
 );
 
 router.get("/register", (req, res) => res.render("auth/register"))
+
+
 
 router.post(
   "/register",
