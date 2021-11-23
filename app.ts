@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
@@ -14,10 +14,18 @@ const ejsLayouts = require("express-ejs-layouts");
 
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
-const authPrismaRoute = require("./routes/authPrismaRoute")
 const passport = require("./middleware/passport");
 
 require("dotenv").config()
+
+declare module "express" {
+    export interface Request {
+        user: any
+        session: any
+    }
+}
+
+
 // create a user
 
 // app.post("/users", async (req: Request, res: Response) => {
@@ -32,41 +40,41 @@ require("dotenv").config()
 //     }
 // })
 
-app.post("/register", async (req: Request, res: Response) => {
-        const { name, email, password, role} = req.body;
-        try {
-            const user = await prisma.user.create({
-                data: { name, email, password, role }
-            });
-            res.redirect("/auth/login")
-            return res.json(user);
-        } catch (err) {
-            return res.status(400).json(err);
-        }
-    })
+// app.post("/register", async (req: Request, res: Response) => {
+//         const { name, email, password, role} = req.body;
+//         try {
+//             const user = await prisma.user.create({
+//                 data: { name, email, password, role }
+//             });
+//             res.redirect("/auth/login")
+//             return res.json(user);
+//         } catch (err) {
+//             return res.status(400).json(err);
+//         }
+//     })
 
-app.get("/users", async (req: Request, res: Response) => {
-    try {
-        const users = await prisma.user.findMany({
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                role: true,
-                reminders: true,
-                posts: {
-                    select: {
-                        body: true,
-                        title: true
-                    }
-                }
-            }
-        })
-        return res.json(users);
-    } catch (err) {
-        return res.status(500).json({ error: "something went wrong :("})
-    }
-})
+// app.get("/users", async (req: Request, res: Response) => {
+//     try {
+//         const users = await prisma.user.findMany({
+//             select: {
+//                 id: true,
+//                 name: true,
+//                 email: true,
+//                 role: true,
+//                 reminders: true,
+//                 posts: {
+//                     select: {
+//                         body: true,
+//                         title: true
+//                     }
+//                 }
+//             }
+//         })
+//         return res.json(users);
+//     } catch (err) {
+//         return res.status(500).json({ error: "something went wrong :("})
+//     }
+// })
 
 app.get("/posts", async (req: Request, res: Response) => {
     try {
@@ -121,22 +129,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-//   console.log(`User details are: `);
-//   console.log(req.user);
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`User details are: `);
+  console.log(req.user);
 
-//   console.log("Entire session object:");
-//   console.log(req.session);
+  console.log("Entire session object:");
+  console.log(req.session);
 
-//   console.log(`Session details are: `);
-//   console.log(req.session.passport);
+  console.log(`Session details are: `);
+  console.log(req.session.passport);
   next();
 });
 
 
 app.use("/", indexRoute);
 app.use("/auth", authRoute);
-app.use("/authPrisma", authPrismaRoute);
 
 
 app.listen(3001, () => {
