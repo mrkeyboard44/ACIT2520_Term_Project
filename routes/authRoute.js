@@ -11,6 +11,7 @@ const getRandomImage = async () => {
   try {
     const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_CLIENT_ID}`)
     const jsonData =  await response.json()
+    console.log(jsonData)
     return jsonData.urls.regular
   } catch (err) {
     console.log(err)

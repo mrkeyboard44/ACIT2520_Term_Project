@@ -29,6 +29,8 @@ router.post("/reminder/delete/:id", ensureAuthenticated, remindersController.del
 
 router.post("/reminder/", ensureAuthenticated, remindersController.create);
 
+router.post("/uploads", ensureAuthenticated, remindersController.upload)
+
 module.exports = router;
 
 
