@@ -3,7 +3,8 @@ const app = express();
 const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
-
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 // const multer = require("multer")
 // const imgur = require("imgur")
 require("dotenv").config()

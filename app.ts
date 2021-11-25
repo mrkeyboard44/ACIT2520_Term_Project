@@ -5,12 +5,9 @@ const prisma = new PrismaClient();
 const app = express()
 app.use(express.json());
 
-
 const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
-
-
 
 const authRoute = require("./routes/authRoute");
 const indexRoute = require("./routes/indexRoute");
@@ -76,7 +73,7 @@ declare module "express" {
 //     }
 // })
 
-app.get("/posts", async (req: Request, res: Response) => {
+app.get("/posts", async (req: any, res: any) => {
     try {
         const posts = await prisma.post.findMany()
         return res.json(posts);
@@ -129,7 +126,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: any, res: any, next: any) => {
   console.log(`User details are: `);
   console.log(req.user);
 

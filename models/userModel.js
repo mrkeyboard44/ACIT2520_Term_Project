@@ -1,5 +1,7 @@
+const { PrismaClient } = require(".prisma/client");
+const { randomUUID } = require("crypto");
 const { database } = require("./userDatabase");
-
+const prisma = new PrismaClient()
 const userModel = {
   findOne: (email) => {
     const user = database.find((user) => user.email === email);
@@ -14,7 +16,20 @@ const userModel = {
       return user;
     }
   },
+
+  createUser: async(profile) => {
+    try {
+      console.log(profile)
+      const { id, name, email, password, role } = profile;
+      const user = await prisma.user.create({
+          data: { "githubId": id , name, email, password,  "role":"user" }
+      });
+    } catch (err) {
+      throw err
+    }
+  },
   findOrCreate: (profile) => {
+
     console.log(profile.id)
     const user = database.find((user) => user.id == profile.id);
     if (user) {
@@ -34,5 +49,7 @@ const userModel = {
   },
   
 };
+
+
 
 module.exports = { userModel };
