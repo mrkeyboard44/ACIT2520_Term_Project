@@ -1,4 +1,5 @@
 Nov 15 / 2021 (Third Sprint Complete)
+
 Matthew Dandar: 
 - 
 
@@ -8,6 +9,7 @@ I worked on the following tasks:
 
 
 Nov 2 / 2021 (Second Sprint Complete)
+
 Matthew Dandar:
 I worked on the following tasks:
 - Implemented the authentication portion of login feature - This task is responible for allowing only the authenicated user to view their information
@@ -24,6 +26,7 @@ Richard Wang:
 
 
 Oct 26 / 2021 (first sprint complete)
+
 Matthew Dandar:
 I worked on the following tasks:
 - Created a Github Repository for our term project
