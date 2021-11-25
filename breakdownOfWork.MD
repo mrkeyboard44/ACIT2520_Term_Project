@@ -1,7 +1,7 @@
 Nov 15 / 2021 (Third Sprint Complete)
 
 Matthew Dandar: 
-- 
+
 
 Alyssa Champion: 
 I worked on the following tasks:
@@ -25,7 +25,7 @@ Richard Wang:
 
 
 
-Oct 26 / 2021 (first sprint complete)
+Oct 26 / 2021 (First Sprint Complete)
 
 Matthew Dandar:
 I worked on the following tasks:
