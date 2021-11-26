@@ -1,8 +1,14 @@
 const { userModel } = require("../models/userModel");
+const imgur = require("imgur")
+const fs = require("fs")
+
+
 
 let remindersController = {
   list: (req, res) => {
-    res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders });
+    console.log("req id", req.user.id)
+    console.log("usermodel findbyid", userModel.findById(req.user.id))
+    res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders, user: req.user });
   },
 
   new: (req, res) => {
@@ -69,10 +75,25 @@ let remindersController = {
     res.redirect("/reminders");
   },
 
-  
+  upload: async (req, res) => {
+      console.log("i am a file")
+      const file = req.files[0];
+      console.log("file:", file)
+      try {
+        console.log("uploading file to imgur")
+        const url = await imgur.uploadFile(`./uploads/${file.filename}`);
+        console.log("file uploaded")
+        // res.json({ message: url.data.link });
+        req.user.image = url.link
+        console.log(url)
+        await fs.unlinkSync(`./uploads/${file.filename}`);
 
 
-
+        res.redirect('/reminders')
+      } catch (error) {
+        console.log("error", error);
+      }
+  }
 };
 
 module.exports = remindersController;

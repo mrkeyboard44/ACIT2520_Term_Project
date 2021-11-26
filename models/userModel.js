@@ -1,4 +1,7 @@
+const fetch = require("node-fetch");
 const { database } = require("./userDatabase");
+require('dotenv').config()
+const process = require('process');
 
 const userModel = {
   findOne: (email) => {
@@ -26,7 +29,8 @@ const userModel = {
         email: null,
         password: null,
         reminders: [],
-      }
+        image: profile._json.avatar_url,
+      };
       database.push(newUser)
       const user = database.find((user) => user.id == profile.id);
       return user
