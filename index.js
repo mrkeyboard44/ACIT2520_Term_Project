@@ -4,6 +4,7 @@ const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
 
+
 const authRoute = require("./routes/authRoute");
 const passport = require("./middleware/passport");
 const indexRoute = require("./routes/indexRoute");
@@ -14,8 +15,11 @@ const multer = require("multer")
 require("dotenv").config()
 
 const storage = multer.diskStorage({
-  destination: "./uploads",
+  destination: (req, file, callback) => {
+    callback(null, "./uploads")
+  },
   filename: (req, file, callback) => {
+    console.log("file downloaded to server")
     callback(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)

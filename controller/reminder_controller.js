@@ -1,5 +1,6 @@
 const { userModel } = require("../models/userModel");
 const imgur = require("imgur")
+const fs = require("fs")
 
 
 
@@ -77,12 +78,19 @@ let remindersController = {
 
   upload: async (req, res) => {
       console.log("i am a file")
-      const file = req.body.file;
+      const file = req.files[0];
+      console.log("file:", file)
       try {
+        console.log("uploading file to imgur")
         const url = await imgur.uploadFile(`./uploads/${file.filename}`);
         console.log("file uploaded")
-        res.json({ message: url.data.link });
-        fs.unlinkSync(`./uploads/${file.filename}`);
+        // res.json({ message: url.data.link });
+        req.user.image = url.link
+        console.log(url)
+        await fs.unlinkSync(`./uploads/${file.filename}`);
+
+
+        res.redirect('/reminders')
       } catch (error) {
         console.log("error", error);
       }
