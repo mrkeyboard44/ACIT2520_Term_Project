@@ -3,7 +3,6 @@ const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { database } = require("../models/userDatabase");
 const { userModel } = require("../models/userModel");
-const { stringify } = require("querystring");
 
 let authController = {
   login: async (req, res) => {

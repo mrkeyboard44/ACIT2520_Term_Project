@@ -3,9 +3,8 @@ const { forwardAuthenticated } = require("../middleware/checkAuth");
 const authController = require("../controller/auth_controller");
 require('dotenv').config()
 const fetch = require("node-fetch");
-const passport = require("passport")
-const router = express.Router();
 
+const router = express.Router();
 const getRandomImage = async () => {
   try {
     const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_CLIENT_ID}`)
@@ -16,15 +15,15 @@ const getRandomImage = async () => {
     console.log(err)
   }
 }
-router.get("/login", forwardAuthenticated, authController.login);
+router.get("/login", forwardAuthenticated, (req, res) => res.render("auth/login"));
 
-router.post("/login", (req, res) => { 
+router.post(
+  "/login",
   passport.authenticate("local", {
-    successRedirect: "/dashboard",
+    successRedirect: "/reminders",
     failureRedirect: "/auth/login",
-})
-});
-
+  })
+);
 router.get("/image", (req,res) => res.render("auth/image"))
 router.post("/image", (req,res) => res.redirect("/auth/login"))
 router.get("/register", (req, res) => res.render("auth/register"))
@@ -53,7 +52,17 @@ router.post(
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");
+const passport = require("passport")
 
+const router = express.Router();
+
+router.get("/login", forwardAuthenticated, authController.login);
+
+router.post("/login", (req, res) => { passport.authenticate("local", {
+  successRedirect: "/dashboard",
+  failureRedirect: "/auth/login",
+})
+});
 
 router.get("/register", authController.register)
 

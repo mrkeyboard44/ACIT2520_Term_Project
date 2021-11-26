@@ -1,15 +1,12 @@
-<<<<<<< HEAD
 const fetch = require("node-fetch");
 const { database } = require("./userDatabase");
 require('dotenv').config()
 const process = require('process');
 
-=======
 const { PrismaClient } = require(".prisma/client");
 const { randomUUID } = require("crypto");
 const { database } = require("./userDatabase");
 const prisma = new PrismaClient()
->>>>>>> create_prisma
 const userModel = {
   findOne: (email) => {
     const user = database.find((user) => user.email === email);
