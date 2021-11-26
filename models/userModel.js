@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const { database } = require("./userDatabase");
 require('dotenv').config()
 const process = require('process');
 
@@ -24,10 +23,10 @@ const userModel = {
 
   createUser: async(profile) => {
     try {
-      console.log(profile)
+      console.log("profile from 'createUser'", profile)
       const { id, name, email, password, role } = profile;
       const user = await prisma.user.create({
-          data: { "githubId": id , name, email, password,  "role":"user" }
+          data: { "githubId": "githubtest", name, email, password,  "role":"user" }
       });
     } catch (err) {
       throw err

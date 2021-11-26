@@ -13,7 +13,7 @@ generator client {
 
 model User {
   id          String    @id @default(uuid())
-  githubId    String    @unique
+  githubId    String
   email       String    @unique
   name        String
   password    String
