@@ -47,8 +47,4 @@ let githubLogin = new GithubStrategy(
   }
 );
 
-
-
-
-
 module.exports = passport.use(localLogin).use(githubLogin);
