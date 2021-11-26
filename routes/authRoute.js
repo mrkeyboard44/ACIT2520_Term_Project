@@ -1,8 +1,7 @@
-const express = require("express");
-const passport = require("../middleware/passport");
+const express = require("express")
 const { forwardAuthenticated } = require("../middleware/checkAuth");
-const { database } = require("../models/userDatabase");
 const authController = require("../controller/auth_controller");
+<<<<<<< HEAD
 require('dotenv').config()
 const fetch = require("node-fetch");
 
@@ -54,7 +53,25 @@ router.post(
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");
+=======
+const passport = require("passport")
+
+const router = express.Router();
+
+router.get("/login", forwardAuthenticated, authController.login);
+
+router.post("/login", (req, res) => { passport.authenticate("local", {
+  successRedirect: "/dashboard",
+  failureRedirect: "/auth/login",
+})
+>>>>>>> create_prisma
 });
+
+router.get("/register", authController.register)
+
+router.post("/register", authController.registerSubmit)
+
+router.get("/logout", authController.logout);
 
 router.get("/github", authController.githubLogin)
 router.get("/github/callback", authController.gitback)
