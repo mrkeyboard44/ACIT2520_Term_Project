@@ -20,15 +20,21 @@ const getRandomImage = async () => {
 
 
 const userModel = {
-  findOne: (email) => {
-    const user = database.find((user) => user.email === email);
+  findOne: async (email) => {
+    const db_users = await prisma.user.findMany()
+
+    const user = db_users.find((db_user) => db_user.email === email);
+    console.log("user from usermodel findone", user, user.id)
     console.log("using userModel to look for user by email!!!")
     if (user) {
       return user;
     }
   },
-  findById: (id) => {
-    const user = database.find((user) => user.id === id);
+  findById: async (id) => {
+    const db_users = await prisma.user.findMany()
+
+    const user = db_users.find((db_user) => db_user.id === id);
+    console.log("findById", user.id, id)
     if (user) {
       return user;
     }
@@ -38,33 +44,42 @@ const userModel = {
     try {
       new_picture = await getRandomImage()
       console.log(new_picture)
-      console.log("profile from 'createUser'", profile)
+      console.log("profile from 'createUser'")
       const { id, name, email, password, role } = profile;
       const user = await prisma.user.create({
           data: { "githubId": "githubtest", name, email, password, "image": new_picture, "role":"user" }
       });
     } catch (err) {
+      console.log("couldnt create user:")
       throw err
     }
   },
-  findOrCreate: (profile) => {
+  findOrCreate: async (profile) => {
 
-    console.log(profile.id)
-    const user = database.find((user) => user.id == profile.id);
-    if (user) {
-      return user;
-    } else {
-      let newUser = {
-        id: profile.id,
-        name: profile.username,
-        email: null,
-        password: null,
-        reminders: [],
-        image: profile._json.avatar_url,
-      };
-      database.push(newUser)
-      const user = database.find((user) => user.id == profile.id);
-      return user
+    console.log(profile.nodeId)
+    const db_users = await prisma.user.findMany()
+    try {
+      const user = await db_users.find((db_user) => db_user.githubId === profile.nodeId);
+      console.log(user.githubId, profile.nodeId)
+      if (user != undefined) {
+        return user
+      } else {
+        console.log("find or create users")
+        new_picture = await getRandomImage()
+        console.log(new_picture)
+        console.log("profile from 'createUser'")
+        const { nodeId, username } = profile;
+        const newUser = await prisma.user.create({
+            data: { "githubId": nodeId, 'name': username, "email":"unknown", "password":"unknown", "image": new_picture, "role":"user" }
+          });
+
+        const db_users = await prisma.user.findMany()
+        const user = await db_users.find((db_user) => db_user.githubId === profile.nodeId);
+        return user
+      }
+    } catch (err) {
+      console.log("couldnt create user:", profile)
+      throw err
     }
   },
   

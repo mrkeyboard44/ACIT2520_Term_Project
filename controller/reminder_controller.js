@@ -1,67 +1,103 @@
 const { userModel } = require("../models/userModel");
 const imgur = require("imgur")
 const fs = require("fs")
-
-
+const { PrismaClient } = require(".prisma/client");
+const prisma = new PrismaClient()
 
 let remindersController = {
-  list: (req, res) => {
-    console.log("req id", req.user.id)
-    console.log("usermodel findbyid", userModel.findById(req.user.id))
-    res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders, user: req.user });
+  list: async (req, res) => {
+    console.log(req.user)
+    console.log("req id", await prisma.reminder.findMany())
+    const getReminders = await prisma.reminder.findMany({
+      where: {
+        userId: {
+          contains: req.user.id,
+        },
+      },
+      include: {
+        user: true, // Return all fields
+      },
+    })
+    console.log(getReminders)
+    res.render("reminder/index", { user: req.user, reminders: getReminders });
   },
 
   new: (req, res) => {
     res.render("reminder/create");
   },
 
-  listOne: (req, res) => {
+  listOne: async (req, res) => {
+
     let reminderToFind = req.params.id;
-    let searchResult = userModel.findById(req.user.id).reminders.find(function (reminder) {
-      return reminder.id == reminderToFind;
-    });
-    if (searchResult != undefined) {
-      res.render("reminder/single-reminder", { reminderItem: searchResult });
+    const getReminder = await prisma.reminder.findMany({
+      where: {
+        userId: {
+          contains: req.user.id,
+        },
+        id: {
+          contains: reminderToFind,
+        },
+      },
+      include: {
+        user: true, // Return all fields
+      },
+    })
+
+    console.log("getremider", getReminder)
+
+    if (getReminder != undefined) {
+      res.render("reminder/single-reminder", { reminderItem: getReminder[0] });
     } else {
       res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders });
     }
   },
 
-  create: (req, res) => {
-    let reminder = {
-      id: userModel.findById(req.user.id).reminders.length + 1,
-      title: req.body.title,
-      description: req.body.description,
-      completed: false,
-    };
-    userModel.findById(req.user.id).reminders.push(reminder);
+  create: async (req, res) => {
+
+    const { title, description } = req.body;
+    const { id } = req.user
+      const reminder = await prisma.reminder.create({
+          data: { title: title, description: description, completed: false, userId: id }
+      });
     res.redirect("/reminders");
   },
 
-  edit: (req, res) => {
+  edit: async (req, res) => {
     let reminderToFind = req.params.id;
-    let searchResult = userModel.findById(req.user.id).reminders.find(function (reminder) {
-      return reminder.id == reminderToFind;
-    });
-    res.render("reminder/edit", { reminderItem: searchResult });
+    const getReminder = await prisma.reminder.findMany({
+      where: {
+        userId: {
+          contains: req.user.id,
+        },
+        id: {
+          contains: reminderToFind,
+        },
+      },
+      include: {
+        user: true, // Return all fields
+      },
+    })
+
+    
+    res.render("reminder/edit", { reminderItem: getReminder[0] });
   },
 
-  update: (req, res) => {
-    let reminder = {
-      id: req.params.id,
-      title: req.body.title,
-      description: req.body.description
-    };
-    if (req.body.completed == 'true') {
-      reminder['completed'] = true
+  update: async (req, res) => {
+
+
+    let reminderToFind = req.params.id
+    // new_completed = false
+    const { id, title, description, completed } = req.body
+    if (completed == 'true') {
+      new_completed = true
     } else {
-      reminder['completed'] = false
+      new_completed = false
     }
-    userModel.findById(req.user.id).reminders.map( (rem, i) => {
-      if (reminder.id == rem.id) {
-        userModel.findById(req.user.id).reminders.splice(i, 1, reminder)
-        } 
-      });
+    const reminder = await prisma.reminder.update({
+        where: { id: reminderToFind },
+        data: { title: title, description: description, completed: new_completed }
+    });
+
     console.log(reminder)
     res.redirect("/reminders");
 
@@ -87,8 +123,6 @@ let remindersController = {
         req.user.image = url.link
         console.log(url)
         await fs.unlinkSync(`./uploads/${file.filename}`);
-
-
         res.redirect('/reminders')
       } catch (error) {
         console.log("error", error);

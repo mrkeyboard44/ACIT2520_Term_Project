@@ -7,8 +7,9 @@ const localLogin = new LocalStrategy(
     usernameField: "email",
     passwordField: "password",
   },
-  (email, password, done) => {
-    const user = userController.getUserByEmailIdAndPassword(email, password);
+  async (email, password, done) => {
+    const user = await userController.getUserByEmailIdAndPassword(email, password);
+    console.log("user auth accepted from getuserbyemail")
     return user
       ? done(null, user)
       : done(null, false, {
@@ -18,11 +19,12 @@ const localLogin = new LocalStrategy(
 );
 
 passport.serializeUser(function (user, done) {
+  console.log("serialize", user)
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
-  let user = userController.getUserById(id);
+passport.deserializeUser( async (id, done) => {
+  let user = await userController.getUserById(id);
   if (user) {
     done(null, user);
   } else {
@@ -39,9 +41,10 @@ let githubLogin = new GithubStrategy(
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
-(accessToken, refreshToken, profile, done) => {
-  console.log("profile", profile)
-  let user = userController.getUserByGithubIdOrCreate(profile)
+async (accessToken, refreshToken, profile, done) => {
+  console.log("github strategy passport profile", profile)
+  let user = await userController.getUserByGithubIdOrCreate(profile)
+  console.log("github strategy passport user",user)
   return done(null, user);
   
   }
