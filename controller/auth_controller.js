@@ -37,10 +37,10 @@ let authController = {
     res.redirect("/auth/login");
   },
 
-  githubLogin: (req, res) => {
+  githubLogin: (req, res, next) => {
     passport.authenticate('github', {scope: ['user:email']})(req, res, next)
   },
-  gitback: (req, res) => {
+  gitback: (req, res, next) => {
     passport.authenticate('github', {failureRedirect: '/auth/login', successRedirect: "/reminders"})(req, res, next)
   },
   // unsplashImage: (req,res,next) => {

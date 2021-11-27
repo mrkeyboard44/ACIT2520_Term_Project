@@ -6,6 +6,19 @@ const { PrismaClient } = require(".prisma/client");
 const { randomUUID } = require("crypto");
 const { database } = require("./userDatabase");
 const prisma = new PrismaClient()
+
+const getRandomImage = async () => {
+  try {
+    const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_CLIENT_ID}`)
+    const jsonData =  await response.json()
+    console.log(jsonData)
+    return jsonData.urls.regular
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+
 const userModel = {
   findOne: (email) => {
     const user = database.find((user) => user.email === email);
@@ -23,10 +36,12 @@ const userModel = {
 
   createUser: async(profile) => {
     try {
+      new_picture = await getRandomImage()
+      console.log(new_picture)
       console.log("profile from 'createUser'", profile)
       const { id, name, email, password, role } = profile;
       const user = await prisma.user.create({
-          data: { "githubId": "githubtest", name, email, password,  "role":"user" }
+          data: { "githubId": "githubtest", name, email, password, "image": new_picture, "role":"user" }
       });
     } catch (err) {
       throw err
