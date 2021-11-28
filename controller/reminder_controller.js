@@ -74,7 +74,7 @@ let remindersController = {
         },
       },
       include: {
-        user: true, // Return all fields
+        user: true,
       },
     })
 
@@ -84,9 +84,7 @@ let remindersController = {
 
   update: async (req, res) => {
 
-
     let reminderToFind = req.params.id
-    // new_completed = false
     const { id, title, description, completed } = req.body
     if (completed == 'true') {
       new_completed = true
