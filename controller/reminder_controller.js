@@ -101,11 +101,14 @@ let remindersController = {
 
   },
 
-  delete: (req, res) => {
-    let index = -1;
-    if (index <= 0) {
-      userModel.findById(req.user.id).reminders.splice(index, 1);
-    }
+  delete: async (req, res) => {
+    let reminderToFind = req.params.id
+    const { id, title, description, completed } = req.body
+    const deleteReminder = await prisma.reminder.delete({
+      where: {
+        id: reminderToFind,
+      },
+    })
     res.redirect("/reminders");
   },
 
