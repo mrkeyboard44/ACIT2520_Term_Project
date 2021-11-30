@@ -3,36 +3,8 @@ const app = express();
 const path = require("path");
 const session = require("express-session");
 const ejsLayouts = require("express-ejs-layouts");
-
-
-const authRoute = require("./routes/authRoute");
-const passport = require("./middleware/passport");
-const indexRoute = require("./routes/indexRoute");
-
-// const cors = require('cors')
-const multer = require("multer")
-
-
-// const multer = require("multer")
-// const imgur = require("imgur")
-require("dotenv").config()
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "./uploads")
-  },
-  filename: (req, file, callback) => {
-    console.log("file downloaded to server")
-    callback(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-const upload = multer({
-  storage: storage,
-});
-
+const { PrismaClient } = require(".prisma/client");
+const prisma = new PrismaClient();
 
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -49,15 +21,13 @@ app.use(
   })
 );
 
-
+const authRoute = require("./routes/authRoute");
+const passport = require("./middleware/passport");
+const indexRoute = require("./routes/indexRoute");
 
 app.use(express.json());
-// app.use(express.json({ extended: false }));
-
-// app.use(cors());
 app.use(ejsLayouts);
 app.use(express.urlencoded({ extended: true }));
-app.use(upload.any());
 app.use(passport.initialize());
 app.use(passport.session());
 

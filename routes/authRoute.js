@@ -1,7 +1,6 @@
 const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
-const { database } = require("../models/userDatabase");
 const authController = require("../controller/auth_controller");
 require('dotenv').config()
 const fetch = require("node-fetch");

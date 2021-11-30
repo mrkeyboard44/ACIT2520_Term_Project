@@ -1,3 +1,6 @@
+const { PrismaClient } = require(".prisma/client");
+const prisma = new PrismaClient()
+
 module.exports = {
   ensureAuthenticated: function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -13,8 +16,12 @@ module.exports = {
     res.redirect("/reminders");
   },
 
-  isAdmin: function(req, res, next) {
-    if (req.user.role == 'admin') {
+  isAdmin: async (req, res, next) => {
+    const id = req.user.id
+    const db_users = await prisma.user.findMany()
+    const user = db_users.find((db_user) => db_user.id === id);
+    console.log("isadmin user", user)
+    if (user.role == 'admin') {
       console.log("your an admin :D")
       return next()
     } else {

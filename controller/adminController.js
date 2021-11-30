@@ -16,9 +16,10 @@ let adminController = {
     },
 
     revoke_session: (req, res) => {
-        (req.sessionStore.destroy(req.params.id, () => {
+        console.log(req.sessionStore)
+        req.sessionStore.destroy(req.params.id, () => {
             res.redirect('/admin')
-        }))
+        })
     },
     
 }

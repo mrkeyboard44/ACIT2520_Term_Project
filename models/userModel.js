@@ -4,7 +4,6 @@ const process = require('process');
 
 const { PrismaClient } = require(".prisma/client");
 const { randomUUID } = require("crypto");
-const { database } = require("./userDatabase");
 const prisma = new PrismaClient()
 
 const getRandomImage = async () => {
