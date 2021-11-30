@@ -46,7 +46,7 @@ const userModel = {
       console.log(new_picture)
       console.log("profile from 'createUser'")
       const { id, name, email, password, role } = profile;
-      const user = await prisma.user.create({
+      await prisma.user.create({
           data: { "githubId": "githubtest", name, email, password, "image": new_picture, "role":"user" }
       });
     } catch (err) {

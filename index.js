@@ -12,8 +12,7 @@ const indexRoute = require("./routes/indexRoute");
 // const cors = require('cors')
 const multer = require("multer")
 
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+
 // const multer = require("multer")
 // const imgur = require("imgur")
 require("dotenv").config()
