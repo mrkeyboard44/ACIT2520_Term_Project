@@ -103,7 +103,8 @@ let remindersController = {
 
   delete: async (req, res) => {
     let reminderToFind = req.params.id
-    await prisma.reminder.delete({
+    const { id, title, description, completed } = req.body
+    const deleteReminder = await prisma.reminder.delete({
       where: {
         id: reminderToFind,
       },
