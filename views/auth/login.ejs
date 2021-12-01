@@ -1,7 +1,12 @@
-<div class="container">
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body text-center">
+      <h1 class="mb-3">
+        <img src="/secure-icon.png" alt="icon" width="20%" />
+      </h1>
+      <h2>Login</h2>
     <form action="/auth/login" method="POST">
       <div class="form-group">
-        <h3 class="text-center">Login</h3>
         <label for="email">Email address</label>
         <input 
         type="email" 
@@ -21,11 +26,15 @@
         placeholder="Password" 
         name="password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <a class=" btn btn-secondary" href="/">Cancel</a>
-      <h5>Not Registered?</h5>
-      <a class= "btn btn-secondary" href="/auth/register">Sign Up</a>
-      <h5>Or Login with GitHub</h5>
-      <a class= "btn btn-primary" href="/auth/github">GitHub</a>
-    </form>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      <a class=" btn btn-secondary btn-block" href="/">Cancel</a>
+      <div class="form-group">
+      </form>
+      <p class="mt-4">New User? <a href="/auth/register">Register</a></p>
+      <p>Forgot Password? <a href="/auth/forgot">Reset</a></p>
+      <h3>Or Login with GitHub</h3>
+    </div>
+      <a class= "btn btn-primary btn-block" href="/auth/github">GitHub</a>
   </div>
+</div>
+</div>
