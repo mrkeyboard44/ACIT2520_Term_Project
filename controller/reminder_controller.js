@@ -121,7 +121,11 @@ let remindersController = {
         const url = await imgur.uploadFile(`./uploads/${file.filename}`);
         console.log("file uploaded")
         // res.json({ message: url.data.link });
-        req.user.image = url.link
+        await prisma.user.update({
+          where: { id: req.user.id },
+          data: { "image": url.link }
+        });
+        // req.user.image = url.link
         console.log(url)
         await fs.unlinkSync(`./uploads/${file.filename}`);
         res.redirect('/reminders')
