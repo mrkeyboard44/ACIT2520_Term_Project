@@ -2,13 +2,13 @@
   <h1 class="page-header">Reminders</h1>
   <div>
     <a id="imagelink" href="#">
-        <img src="<%= user.image%>" alt="Profile Picture" id="#unsplashImage" style="width:300px;height:300px;" />
+        <img src="<%=user.image%>" alt="Profile Picture" id="#unsplashImage" style="width:300px;height:300px;" />
 
     </a>
     <form action="/uploads" enctype="multipart/form-data" method="POST">
       <div class="form-group">
         <input type="file" name="file" id="file">
-        <script src="index.js"></script>
+        <!-- <script src="index.js"></script> -->
         <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>

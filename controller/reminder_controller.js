@@ -114,16 +114,22 @@ let remindersController = {
 
   upload: async (req, res) => {
       console.log("i am a file")
-      const file = req.files[0];
-      console.log("file:", file)
+      console.log(req.files)
+      const fileupload = req.files[0];
+      console.log("file:", fileupload)
       try {
         console.log("uploading file to imgur")
-        const url = await imgur.uploadFile(`./uploads/${file.filename}`);
+        const url = await imgur.uploadFile(`./uploads/${fileupload.filename}`);
         console.log("file uploaded")
         // res.json({ message: url.data.link });
         req.user.image = url.link
         console.log(url)
-        await fs.unlinkSync(`./uploads/${file.filename}`);
+        console.log(req.user.image)
+        await fs.unlinkSync(`./uploads/${fileupload.filename}`);
+        await prisma.user.update({
+          where: { id: req.user.id },
+          data: { image: req.user.image }
+      });
         res.redirect('/reminders')
       } catch (error) {
         console.log("error", error);
