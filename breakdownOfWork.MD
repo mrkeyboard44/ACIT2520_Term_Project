@@ -1,3 +1,17 @@
+Nov 30 / 2021 (Fourth Sprint Complete)
+Matthew Dandar: 
+I worked on the following tasks:
+-Set up Prisma Database and integrated it with most of the functions
+
+Alyssa Champion: 
+I worked on the following tasks:
+- Added Delete Function to database
+
+Richard Wang
+I worked on the following tasks:
+- Added the ability for Users to upload their images.
+
+
 Nov 15 / 2021 (Third Sprint Complete)
 
 Matthew Dandar: 
@@ -6,6 +20,7 @@ Matthew Dandar:
 Alyssa Champion: 
 I worked on the following tasks:
 - Used Unsplash API to generate random profile picture - This task is responible for calling the API to generate a random image for the new user's profile picture. Already made users will have the original image that was given when they signed up.
+
 
 
 Nov 2 / 2021 (Second Sprint Complete)
@@ -21,7 +36,8 @@ I worked on the following tasks:
 
 
 Richard Wang:
-- imported required passport files into repository
+I worked on the following tasks:
+- imported required passport files into repository (For local login and authentication)
 
 
 

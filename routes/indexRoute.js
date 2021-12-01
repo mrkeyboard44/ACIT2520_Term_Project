@@ -2,6 +2,8 @@ const express = require("express");
 const adminController = require("../controller/adminController");
 const remindersController = require("../controller/reminder_controller");
 const router = express.Router();
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
 
 router.get("/", (req, res) => {
