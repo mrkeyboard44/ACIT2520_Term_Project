@@ -32,15 +32,15 @@ let authController = {
       if (errMessage.search("null") != -1) {
         errTypes.forEach((type) => {
           if (errMessage.search(type) != -1) {
-            res.render("auth/register-error", { registerErr: `${type} was empty`, err })
+            res.render("auth/register-error", { registerErr: `${type} was empty`, err, userExists: false })
           }
         })
       } else {
       errTypes.forEach((type) => {
           if (errMessage.search(type) != -1) {
-            res.render("auth/register-error", { registerErr: `user with this ${type} already exists`, err })
+            res.render("auth/register-error", { registerErr: `user with this ${type} already exists`, err: "Error: user alread exists", userExists: true })
           } else {
-          res.render("auth/register-error", { registerErr: `Unknown Error!`, err })
+          res.render("auth/register-error", { registerErr: `Unknown Error!`, err, userExists: false })
           }
         })
       }
