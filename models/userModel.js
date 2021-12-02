@@ -42,9 +42,18 @@ const userModel = {
   createUser: async(profile) => {
     try {
       new_picture = await getRandomImage()
-      console.log(new_picture)
       console.log("profile from 'createUser'")
       const { id, name, email, password, role } = profile;
+      for ([key, val] of Object.entries(profile)) {
+        console.log("keyss=-----------------", key, val)
+        if (val === "") {
+          throw new Error(`Error: no ${key} was provided (null values given)`)
+        }
+      }
+      //keep this text here to return a proper error message
+      // same here
+      //this as well just to be sure
+
       await prisma.user.create({
           data: { "githubId": "githubtest", name, email, password, "image": new_picture, "role":"user" }
       });
