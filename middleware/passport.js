@@ -19,7 +19,6 @@ const localLogin = new LocalStrategy(
 );
 
 passport.serializeUser(function (user, done) {
-  console.log("serialize", user)
   done(null, user.id);
 });
 
@@ -42,9 +41,7 @@ let githubLogin = new GithubStrategy(
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
 async (accessToken, refreshToken, profile, done) => {
-  console.log("github strategy passport profile", profile)
   let user = await userController.getUserByGithubIdOrCreate(profile)
-  console.log("github strategy passport user",user)
   return done(null, user);
   
   }

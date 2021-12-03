@@ -5,6 +5,7 @@ const router = express.Router();
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const { ensureAuthenticated, isAdmin } = require("../middleware/checkAuth");
+const profileController = require("../controller/profileController");
 
 router.get("/", (req, res) => {
   res.send("welcome");
@@ -31,5 +32,9 @@ router.post("/uploads", ensureAuthenticated, remindersController.upload);
 router.get("/admin", ensureAuthenticated, isAdmin, adminController.dashboard);
 
 router.get("/admin/:id", ensureAuthenticated, isAdmin, adminController.revoke_session);
+
+router.get("/profile-settings", ensureAuthenticated, profileController.profile);
+
+router.post("/profile-settings", ensureAuthenticated, profileController.updateUser)
 
 module.exports = router;

@@ -5,7 +5,6 @@ const getUserByEmailIdAndPassword = async (email, password) => {
   console.log("getuserbyemailandpassword has been called!!!")
   if (user) {
     if (isUserValid(user, password)) {
-      console.log("valid login by email!!!:", user)
       return user;
     }
   }
@@ -16,7 +15,6 @@ const getUserByEmailIdAndPassword = async (email, password) => {
 const getUserByGithubIdOrCreate = async (profile) => {
   console.log("github user controller called!")
   let user = await userModel.findOrCreate(profile)
-  console.log("getuserbygithub", user)
   return user
 }
 

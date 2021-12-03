@@ -1,29 +1,27 @@
 const fetch = require("node-fetch");
 require('dotenv').config()
 const process = require('process');
-
+const { errorManagement } = require("../controller/errorManagement")
 const { PrismaClient } = require(".prisma/client");
 const { randomUUID } = require("crypto");
+const { Error } = require("mongoose");
 const prisma = new PrismaClient()
 
 const getRandomImage = async () => {
   try {
     const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_CLIENT_ID}`)
     const jsonData =  await response.json()
-    console.log(jsonData)
     return jsonData.urls.regular
   } catch (err) {
     console.log(err)
   }
 }
 
-
 const userModel = {
   findOne: async (email) => {
     const db_users = await prisma.user.findMany()
 
     const user = db_users.find((db_user) => db_user.email === email);
-    console.log("user from usermodel findone", user, user.id)
     console.log("using userModel to look for user by email!!!")
     if (user) {
       return user;
@@ -31,9 +29,7 @@ const userModel = {
   },
   findById: async (id) => {
     const db_users = await prisma.user.findMany()
-
     const user = db_users.find((db_user) => db_user.id === id);
-    console.log("findById", user.id, id)
     if (user) {
       return user;
     }
@@ -45,7 +41,6 @@ const userModel = {
       console.log("profile from 'createUser'")
       const { id, name, email, password, role } = profile;
       for ([key, val] of Object.entries(profile)) {
-        console.log("keyss=-----------------", key, val)
         if (val === "") {
           throw new Error(`Error: no ${key} was provided (null values given)`)
         }
@@ -70,7 +65,6 @@ const userModel = {
         return user
       } else {
         new_picture = await getRandomImage()
-        console.log(new_picture)
         const { nodeId, username } = profile;
         await prisma.user.create({
             data: { "githubId": nodeId, 'name': username, "email":"unknown", "password":"unknown", "image": new_picture, "role":"user" }
@@ -83,7 +77,67 @@ const userModel = {
       throw err
     }
   },
-  
+  updateEmail: async (profile) => {
+    try {
+      const { id, email } = profile
+      await prisma.user.update({
+          where: { id },
+          data: { email }
+        });
+    } catch (err) {
+      throw err
+    }
+  },
+  updatePassword: async (profile) => {
+    try {
+      const { id, password } = profile
+      await prisma.user.update({
+          where: { id },
+          data: { password }
+        });
+    } catch (err) {
+      throw err
+    }
+  },
+  updateUser: async (change, req) => {
+    const id = req.user.id
+    console.log("updateuser id", id)
+    const { name, email, password } = req.body
+    console.log("updateuser profile", req.body)
+    const types = ['email', 'password', 'name']
+    
+    let userChangeError = 'no error'
+    try {
+      if (change == 'email')
+        {
+          await prisma.user.update({
+            where: { id },
+            data: { email }
+          })
+          console.log("prisma updated")
+        }
+        if (change == 'password') {
+          await prisma.user.update({
+            where: { id },
+            data: { password }
+          })
+        }
+        if (change == 'name') {
+          console.log("prisma updating")
+          await prisma.user.update({
+            where: { id },
+            data: { name }
+          })
+          console.log("prisma updated")
+        }
+       
+      } catch (err) {
+        console.log("as usermode i have caught an errors", err)
+        // const errMessage = await err.toString()
+        throw new Error(err)
+      }
+    
+  }
 };
 
 

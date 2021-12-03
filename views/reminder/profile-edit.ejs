@@ -1,0 +1,61 @@
+<% include ../partials/navbar %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body text-center">
+        <h2>Profile Settings</h2>
+        <label>Change Profile Picture</label>
+        <a>
+        <img src="<%= user.image%>" alt="Profile Picture" id="#unsplashImage" style="width:100px;height:100px;" />
+        </a>
+        <form action="/uploads" enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+              <input type="file" name="file" id="file">
+              <script src="index.js"></script>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+          <form action="/profile-settings" method="POST">
+            <div class="form-group">
+              <label for="name">New Name</label>
+              <input 
+              type="name" 
+              class="form-control" 
+              id="name" 
+              aria-describedby="emailHelp" 
+              placeholder="Enter name" 
+              name="name">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Change</button>
+            <div class="form-group">
+          </form>
+      <form action="/profile-settings" method="POST">
+        <div class="form-group">
+          <label for="email">New Email address</label>
+          <input 
+          type="email" 
+          class="form-control" 
+          id="email" 
+          aria-describedby="emailHelp" 
+          placeholder="Enter email" 
+          name="email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Change</button>
+        <div class="form-group">
+      </form>
+      <form>
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          placeholder="Password" 
+          name="password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Change</button>
+        <a class=" btn btn-secondary btn-block" href="/reminders">Cancel</a>
+        <div class="form-group">
+      </form>
+  </div>
+  </div>

@@ -6,8 +6,6 @@ const prisma = new PrismaClient()
 
 let remindersController = {
   list: async (req, res) => {
-    console.log(req.user)
-    console.log("req id", await prisma.reminder.findMany())
     const getReminders = await prisma.reminder.findMany({
       where: {
         userId: {
@@ -18,7 +16,6 @@ let remindersController = {
         user: true, // Return all fields
       },
     })
-    console.log(getReminders)
     res.render("reminder/index", { user: req.user, reminders: getReminders });
   },
 
@@ -43,12 +40,10 @@ let remindersController = {
       },
     })
 
-    console.log("getremider", getReminder)
-
     if (getReminder != undefined) {
-      res.render("reminder/single-reminder", { reminderItem: getReminder[0] });
+      res.render("reminder/single-reminder", { user: req.user, reminderItem: getReminder[0] });
     } else {
-      res.render("reminder/index", { reminders: userModel.findById(req.user.id).reminders });
+      res.render("reminder/index", { user: req.user, reminders: userModel.findById(req.user.id).reminders });
     }
   },
 
@@ -59,7 +54,7 @@ let remindersController = {
       const reminder = await prisma.reminder.create({
           data: { title: title, description: description, completed: false, userId: id }
       });
-    res.redirect("/reminders");
+    res.redirect("/reminders", );
   },
 
   edit: async (req, res) => {
@@ -79,7 +74,7 @@ let remindersController = {
     })
 
     
-    res.render("reminder/edit", { reminderItem: getReminder[0] });
+    res.render("reminder/edit", { user: req.user, reminderItem: getReminder[0] });
   },
 
   update: async (req, res) => {
@@ -95,8 +90,6 @@ let remindersController = {
         where: { id: reminderToFind },
         data: { title: title, description: description, completed: new_completed }
     });
-
-    console.log(reminder)
     res.redirect("/reminders");
 
   },
@@ -114,12 +107,10 @@ let remindersController = {
 
   upload: async (req, res) => {
       console.log("i am a file")
-      console.log(req.files)
       const fileupload = req.files[0];
-      console.log("file:", fileupload)
       try {
         console.log("uploading file to imgur")
-        const url = await imgur.uploadFile(`./uploads/${fileupload.filename}`);
+        let url = await imgur.uploadFile(`./uploads/${fileupload.filename}`);
         console.log("file uploaded")
         // res.json({ message: url.data.link });
         await prisma.user.update({
@@ -127,18 +118,14 @@ let remindersController = {
           data: { "image": url.link }
         });
         // req.user.image = url.link
-        console.log(url)
-        console.log(req.user.image)
         await fs.unlinkSync(`./uploads/${fileupload.filename}`);
-        await prisma.user.update({
-          where: { id: req.user.id },
-          data: { image: req.user.image }
-      });
-        res.redirect('/reminders')
+        
+        res.redirect('/profile-settings')
       } catch (error) {
         console.log("error", error);
       }
-  }
+  },
+  
 };
 
 module.exports = remindersController;

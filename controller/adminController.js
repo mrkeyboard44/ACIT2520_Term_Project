@@ -11,12 +11,11 @@ let adminController = {
                 finalSessionList.push({id: sessionId, userId: value.passport.user})
             }
             let session_list = finalSessionList
-            res.render("admin/dashboard", { sessions: session_list, name: req.user.name} )
+            res.render("admin/dashboard", { user: req.user, sessions: session_list, name: req.user.name} )
         }))
     },
 
     revoke_session: (req, res) => {
-        console.log(req.sessionStore)
         req.sessionStore.destroy(req.params.id, () => {
             res.redirect('/admin')
         })

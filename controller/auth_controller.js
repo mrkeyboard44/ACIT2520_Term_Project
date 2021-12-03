@@ -2,10 +2,10 @@ const express = require("express");
 const passport = require("../middleware/passport");
 const { forwardAuthenticated } = require("../middleware/checkAuth");
 const { userModel } = require("../models/userModel");
+const { errorManagement } = require("../controller/errorManagement")
 
 let authController = {
   login: async (req, res) => {
-    console.log("params------------------------------",req)
     res.render("auth/login");
   },
 
@@ -14,7 +14,6 @@ let authController = {
   },
 
   loginSubmit: async (req, res) => {
-    console.log(req)
     console.log("Request sent")//Get this line of code to work somehow
     passport.authenticate("local", {
       successRedirect: "/dashboard",
@@ -27,25 +26,7 @@ let authController = {
       await userModel.createUser(req.body)
       res.redirect("/auth/login")
     } catch (err) {
-      const errTypes = ["email", "password","name"]
-      let errMessage = err.toString()
-      if (errMessage.search("null") != -1) {
-        errTypes.forEach((type) => {
-          if (errMessage.search(type) != -1) {
-            res.render("auth/register-error", { registerErr: `${type} was empty`, err, userExists: false })
-          }
-        })
-      } else {
-      errTypes.forEach((type) => {
-          if (errMessage.search(type) != -1) {
-            res.render("auth/register-error", { registerErr: `user with this ${type} already exists`, err: "Error: user alread exists", userExists: true })
-          } else {
-          res.render("auth/register-error", { registerErr: `Unknown Error!`, err, userExists: false })
-          }
-        })
-      }
-      // res.send(err)
-      console.log(err)
+      errorManagement.accountError(res, err)
     }
   },
 

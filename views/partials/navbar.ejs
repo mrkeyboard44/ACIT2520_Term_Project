@@ -1,13 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/reminders">Reminder List</a>
+  <a class="navbar-brand" href="/">Remindly</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div class="collapse navbar-collapse pull-right" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="/reminders">Reminder List</a>
       <a class="nav-item nav-link" href="/reminder/new">Create</a>
+      <a class="nav-item nav-link" href="/profile-settings">Profile</a>
       <a class="nav-item nav-link" href="/auth/logout">Log out</a>
-    </div>
+    </a>
   </div>
+</div>
+<img class="pull-right" src="<%= user.image%>" alt="Profile Picture" id="#unsplashImage" style="width:100px;height:100px;" />
+<a class="nav-item nav-link" href="/profile-settings"><%=user.name%></a>
+
 </nav>
