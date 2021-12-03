@@ -20,7 +20,7 @@ let remindersController = {
   },
 
   new: (req, res) => {
-    res.render("reminder/create");
+    res.render("reminder/create", { user: req.user });
   },
 
   listOne: async (req, res) => {
@@ -54,7 +54,7 @@ let remindersController = {
       const reminder = await prisma.reminder.create({
           data: { title: title, description: description, completed: false, userId: id }
       });
-    res.redirect("/reminders", );
+    res.redirect("/reminders");
   },
 
   edit: async (req, res) => {
