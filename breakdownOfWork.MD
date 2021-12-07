@@ -6,25 +6,23 @@ Matthew Dandar:
 - Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
 - Converted Github login to work with Prisma
-- Converted reminder functionality to work with Prisma (Displaying, creating, deleteing, editing)
-- 
+- Converted reminder functionality to work with Prisma (Displaying, Creating, Deleteing, Editing)
+- Uploading images to the Prisma database
+
 Alyssa Champion: 
 - **//---Prisma---//**
 - Implementing Prisma into our project
-- Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
 - Converted Github login to work with Prisma
-- Converted reminder functionality to work with Prisma (Displaying, creating, deleteing, editing)
-
+- Converted reminder functionality to work with Prisma (Displaying, Creating, Deleteing, Editing)
+- Uploading images to the Prisma database
 
 Richard Wang
 - **//---Prisma---//**
 - Implementing Prisma into our project
-- Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
 - Converted Github login to work with Prisma
-- Converted reminder functionality to work with Prisma (Displaying, creating, deleteing, editing)
-
+- Converted reminder functionality to work with Prisma (Displaying, Creating, Editing)
 
 
 
