@@ -1,7 +1,7 @@
 Nov 30 / 2021 (Fourth Sprint Complete)
 Matthew Dandar: 
 - Ability for ADMINS to destroy sessions
-**//---Prisma---//**
+- **//---Prisma---//**
 - Implementing Prisma into our project
 - Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
@@ -9,7 +9,7 @@ Matthew Dandar:
 - Converted reminder functionality to work with Prisma (Displaying, creating, deleteing, editing)
 - 
 Alyssa Champion: 
-**//---Prisma---//**
+- **//---Prisma---//**
 - Implementing Prisma into our project
 - Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
@@ -18,7 +18,7 @@ Alyssa Champion:
 
 
 Richard Wang
-**//---Prisma---//**
+- **//---Prisma---//**
 - Implementing Prisma into our project
 - Converted the Register Function to work with Prisma database
 - Converted Login function to work with Prisma
