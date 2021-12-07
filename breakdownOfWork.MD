@@ -30,15 +30,14 @@ Richard Wang
 Nov 15 / 2021 (Third Sprint Complete)
 
 Matthew Dandar: 
+- **//---Image---//**
 - Used Unsplash API to generate random profile picture
-
 - Added ability to allow users to upload their own images using imgur
 
 
 Alyssa Champion: 
-
+- **//---Image---//**
 - Used Unsplash API to generate random profile picture 
-
 - Added ability to allow users to upload their own images using imgur
 
 
