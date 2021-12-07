@@ -61,7 +61,7 @@ Alyssa Champion:
 - Create function to allow only authenticated users to delete their reminders
 
 Richard Wang:
-
+- **//---Authentication---//**
 - imported required passport files into repository (For local login and authentication)
 
 
