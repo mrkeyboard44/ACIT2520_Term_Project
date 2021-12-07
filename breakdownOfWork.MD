@@ -47,14 +47,18 @@ Alyssa Champion:
 Nov 2 / 2021 (Second Sprint Complete)
 
 Matthew Dandar:
+- **//---Authentication---//**
 
 - Implemented the authentication portion of login feature - This task is responible for allowing only the authenicated user to view their information
 - Implemented Ability for ADMINS to remotely destroy a session - This task is responible for allowing the Admin's to kil session when needed
+- Create function to allow only authenticated users to view their reminders
+- Create function to allow only authenticated users to delete their reminders
 
 Alyssa Champion:
-
-- Implemented register user feature - This task is responbile for allowing the user to sign up using an email and password (local login)
-
+- **//---Authentication---//**
+- Implemented register user feature to sign up with an email and password (local login)
+- Create function to allow only authenticated users to view their reminders
+- Create function to allow only authenticated users to delete their reminders
 
 Richard Wang:
 
