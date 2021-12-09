@@ -22,7 +22,7 @@ Richard Wang
 - Implementing Prisma into our project
 - Converted Login function to work with Prisma
 - Converted Github login to work with Prisma
-- Converted reminder functionality to work with Prisma (Displaying, Creating, Editing)
+- Converted reminder functionality to work with Prisma (Displaying, Creating, Deleteing, Editing)
 
 
 
@@ -61,8 +61,7 @@ Alyssa Champion:
 
 Richard Wang:
 - **//---Authentication---//**
-- imported required passport files into repository (For local login and authentication)
-
+- imported required passport files into repository 
 
 
 Oct 26 / 2021 (First Sprint Complete)
